@@ -40,7 +40,7 @@ jobs:
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login -u russtone --password-stdin docker.pkg.github.com
         docker build -t docker.pkg.github.com/russtone/test/test .
-        docker tag docker.pkg.github.com/russtone/test/test docker.pkg.github.com/russtone/test/test:1.0
+        docker tag docker.pkg.github.com/russtone/test/test docker.pkg.github.com/russtone/test/test:$CURRENT_VERSION
         docker push docker.pkg.github.com/russtone/test/test
 
     - name: Release
