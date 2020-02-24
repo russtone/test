@@ -39,6 +39,7 @@ jobs:
     - name: Publish docker image
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login -u russtone --password-stdin docker.pkg.github.com
+        docker build -t docker.pkg.github.com/russtone/test/test:latest
         docker push docker.pkg.github.com/russtone/test/test:latest
 
     - name: Release
