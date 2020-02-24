@@ -13,13 +13,20 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+
     - name: Fetch history
       run: git fetch --prune --unshallow
+
     - name: Get current version
       run: echo ::set-env name=CURRENT_VERSION::${GITHUB_REF/refs\/tags\//}
-    - name: Get previous version
-      run: echo ::set-env name=PREVIOUS_VERSION::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))
-    - name: Print versions
-      run: |
-        echo $CURRENT_VERSION
-        echo $PREVIOUS_VERSION
+
+    - name: Set up Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13.x
+
+    - name: Install git-chglog
+      run: go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
+
+    - name: Check git-chglog
+      run: git-chglog -h
