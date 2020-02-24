@@ -36,6 +36,10 @@ jobs:
     - name: Generate changelog
       run: git-chglog --config .github/git-chglog.yml --output CHANGELOG.md $CURRENT_VERSION
 
+    - name: Publish docker image
+      run: |
+        cat ${{ secrets.GITHUB_TOKEN }} | docker login -u github-actions --password-stdin
+
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
