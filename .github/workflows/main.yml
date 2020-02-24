@@ -13,8 +13,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Fetch all tags
-      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+    - name: Fetch history
+      run: git fetch --prune --unshallow
     - name: Get current version
       run: echo ::set-env name=CURRENT_VERSION::${GITHUB_REF/refs\/tags\//}
     - name: Get previous version
