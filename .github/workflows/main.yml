@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  create:
+    tags:
+      - v*
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Get current version
+      run: echo ::set-env name=VERSION::${GITHUB_REF/refs\/tags\//}
+    - name: Get previous version
+      run: echo ::set-env name=PREVIOUS_VERSION::$(git describe --tags $(git rev-list --tags --max-count=1))
+    - name: Print versions
+      run: |
+        echo $VERSION
+        echo $PREVIOUS_VERSION
