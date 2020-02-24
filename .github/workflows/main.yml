@@ -38,7 +38,7 @@ jobs:
 
     - name: Publish docker image
       run: |
-        cat ${{ secrets.GITHUB_TOKEN }} | docker login -u github-actions --password-stdin
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login -u github-actions --password-stdin
 
     - name: Release
       uses: softprops/action-gh-release@v1
