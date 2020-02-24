@@ -28,7 +28,7 @@ jobs:
     - name: Setup env
       run: |
         echo ::set-env name=GOPATH::$(go env GOPATH)
-        echo ::add-path::$GOPATH/bin
+        echo ::add-path::$(go env GOPATH)/bin
 
     - name: Install git-chglog
       run: go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
