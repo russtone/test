@@ -33,5 +33,12 @@ jobs:
     - name: Install git-chglog
       run: go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
 
-    - name: Check git-chglog
-      run: git-chglog -h
+    - name: Generate changelog
+      run: git-chglog --config .github/git-chglog.yml --output CHANGELOG.md $CURRENT_VERSION
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body_path: CHANGELOG.md
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
