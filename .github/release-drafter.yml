@@ -1,0 +1,8 @@
+name-template: Release <TAG> on YYYY-MM-DD
+categories:
+  - title: 'Features'
+    label: 'enhancement'
+  - title: 'Bug Fixes'
+    label: 'bug'
+template: |
+  $CHANGES
